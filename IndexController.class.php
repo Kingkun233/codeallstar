@@ -2,27 +2,30 @@
 namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
+     /*     
+            对上传的项目文件和描述信息进行整理， deal_upload方法实现
+            将描述信息存入数据库，将压缩包解压到项目存储文件夹projec中，deal_upload方法实现
+            之后对解压后的文件夹读取文件中的文件目录并生成一个数组，dirToArray方法实现
+            在读取的过程中遇到项目后缀名符合要求的（包含代码）就读取其中的代码数据和路径等相关信息存入数据库think_file dirToArray方法实现
+            之后将return回来的数组序列化后与项目相关信息存入think_pro数据库中 deal_upload方法实现
+            当要管理整个项目时（假设时将页面效果展示给用户看） show_pro方法实现（方法所属的html还添加了一段php代码）
+            便读取与该用户有关的项目信息，取得其中的文件数组   show_pro方法实现（方法所属的html还添加了一段php代码）
+            再通过拼接形成具体路劲，之后数个foreach循环将用户的项目展示给用户看  show_pro方法实现（方法所属的html还添加了一段php代码）
+            
+            */
     public function index(){
         /*$this->show('<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #fff; font-family: "微软雅黑"; color: #333;font-size:24px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px } a,a:hover,{color:blue;}</style><div style="padding: 24px 48px;"> <h1>:)</h1><p>欢迎使用 <b>ThinkPHP</b>！</p><br/>版本 V{$Think.version}</div><script type="text/javascript" src="http://ad.topthink.com/Public/static/client.js"></script><thinkad id="ad_55e75dfae343f5a1"></thinkad><script type="text/javascript" src="http://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script>','utf-8');*/
        $this->display();
     }
-    public function show(){
-    	echo U('Index/index');
-    	$this->display();
-    	
-    }
+    
     public function up_pro(){
-
+        //测试用，主要是上传项目压缩文件
     	$this->display();
     }
-    public function session_user(){
-        $_SESSION['username']="yupwei";
-        $_SESSION["password"]="123";
-        $_COOKIE['username']="yupwei";
-        $_COOKIE['password']="123"; 
-    }
+    
     public function deal_upload(){
         if(IS_POST){
+           
             $interface=$_POST['interface'];
             $pro_name=$_POST['pro_name'];
             $temp_path=$_POST['templtatepath'];
